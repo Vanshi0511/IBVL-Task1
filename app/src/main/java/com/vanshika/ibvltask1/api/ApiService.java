@@ -1,4 +1,4 @@
-package com.vanshika.ibvltask1.network;
+package com.vanshika.ibvltask1.api;
 import com.vanshika.ibvltask1.model.LoginRequest;
 import com.vanshika.ibvltask1.model.LoginResponse;
 import com.vanshika.ibvltask1.model.Transaction;

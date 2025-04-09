@@ -10,14 +10,15 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.vanshika.ibvltask1.room.AppDatabase;
+import com.vanshika.ibvltask1.adapter.TransactionAdapter;
+import com.vanshika.ibvltask1.db.AppDatabase;
 import com.vanshika.ibvltask1.utils.BiometricHelper;
 import com.vanshika.ibvltask1.R;
 import com.vanshika.ibvltask1.utils.TokenManager;
-import com.vanshika.ibvltask1.room.TransactionEntity;
+import com.vanshika.ibvltask1.db.TransactionEntity;
 import com.vanshika.ibvltask1.model.Transaction;
-import com.vanshika.ibvltask1.network.ApiService;
-import com.vanshika.ibvltask1.network.RetrofitClient;
+import com.vanshika.ibvltask1.api.ApiService;
+import com.vanshika.ibvltask1.api.RetrofitClient;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;

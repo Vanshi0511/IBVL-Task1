@@ -1,4 +1,4 @@
-package com.vanshika.ibvltask1.room;
+package com.vanshika.ibvltask1.db;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;

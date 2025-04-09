@@ -1,4 +1,4 @@
-package com.vanshika.ibvltask1.network;
+package com.vanshika.ibvltask1.api;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

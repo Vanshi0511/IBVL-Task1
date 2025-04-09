@@ -1,4 +1,4 @@
-package com.vanshika.ibvltask1.ui;
+package com.vanshika.ibvltask1.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

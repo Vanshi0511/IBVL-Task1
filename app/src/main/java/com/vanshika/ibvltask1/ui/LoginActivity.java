@@ -15,8 +15,8 @@ import com.vanshika.ibvltask1.R;
 import com.vanshika.ibvltask1.utils.TokenManager;
 import com.vanshika.ibvltask1.model.LoginRequest;
 import com.vanshika.ibvltask1.model.LoginResponse;
-import com.vanshika.ibvltask1.network.ApiService;
-import com.vanshika.ibvltask1.network.RetrofitClient;
+import com.vanshika.ibvltask1.api.ApiService;
+import com.vanshika.ibvltask1.api.RetrofitClient;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -44,20 +44,20 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         loginBtn.setOnClickListener(v -> {
-            String email = emailEt.getText().toString();
+            String username = emailEt.getText().toString();
             String password = passwordEt.getText().toString();
-            login(email, password);
+            login(username, password);
         });
     }
 
-    private void login(String email, String password)
+    private void login(String username, String password)
 
 
     {
-        LoginRequest request = new LoginRequest(email, password);
+        LoginRequest request = new LoginRequest(username, password);
         ApiService api = RetrofitClient.getApiService();
 
-        Log.d("LoginRequest", "Attempting login with: " + email);
+        Log.d("LoginRequest", "Attempting login with: " + username);
 
         api.login(request).enqueue(new Callback<LoginResponse>() {
             @Override
