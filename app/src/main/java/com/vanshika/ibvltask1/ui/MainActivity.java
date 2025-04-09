@@ -2,6 +2,7 @@ package com.vanshika.ibvltask1.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -60,10 +61,14 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
         });
+
     }
 
-    private void fetchTransactions() {
-        String token = "Bearer " + tokenManager.getToken();
+    private void fetchTransactions()
+    {
+        String token =  tokenManager.getToken();
+        Log.d("API_TOKEN", "Token used: " + token);  // 🔍 Print token in log
+
         ApiService api = RetrofitClient.getApiService();
 
         api.getTransactions(token).enqueue(new Callback<List<Transaction>>() {
@@ -71,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<List<Transaction>> call, Response<List<Transaction>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Transaction> transactions = response.body();
+                    Log.d("API_SUCCESS", "Transactions fetched: " + transactions.size());
+
                     adapter.setData(transactions);
 
                     // Save to Room
@@ -83,19 +90,28 @@ public class MainActivity extends AppCompatActivity {
                         AppDatabase db = AppDatabase.getInstance(MainActivity.this);
                         db.transactionDao().deleteAll();
                         db.transactionDao().insertAll(entities);
+                        Log.d("ROOM_DB", "Transactions saved to Room DB");
                     }).start();
 
                 } else {
+                    try {
+                        String errorBody = response.errorBody() != null ? response.errorBody().string() : "null";
+                        Log.e("API_ERROR", "API failed with code: " + response.code() + "\nError body: " + errorBody);
+                    } catch (Exception e) {
+                        Log.e("API_ERROR", "Error reading error body", e);
+                    }
                     loadFromDb(); // fallback
                 }
             }
 
             @Override
             public void onFailure(Call<List<Transaction>> call, Throwable t) {
+                Log.e("API_FAILURE", "API call failed: " + t.getMessage(), t);
                 loadFromDb(); // fallback
             }
         });
     }
+
 
     private void loadFromDb() {
         new Thread(() -> {
